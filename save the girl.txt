@@ -1,0 +1,78 @@
+var girl=createSprite(145,352,20,20)
+var house=createSprite(43,344,20,20)
+var restaurant=createSprite(25,38,20,20)
+var knife1=createSprite(380,105,20,20)
+var knife2 =createSprite(19,249,20,20)
+var knife3=createSprite(366,25,20,20)
+var lives=10
+
+house.shapeColor="green"
+girl.shapeColor="pink"
+girl.setAnimation("pink_shirt_wave_1")
+house.setAnimation("building_02_1")
+restaurant.setAnimation("building_17_1")
+knife1.setAnimation("knife_blue_1")
+knife2.setAnimation("knife_blue_1")
+knife3.setAnimation("knife_blue_1")
+knife1.scale=0.3
+knife2.scale=0.3
+knife3.scale=0.3
+restaurant.scale=0.4;
+house.scale=0.3;
+girl.scale=0.2;
+function draw(){
+background("lightgreen")
+textSize(21);
+   fill("yellow")
+   text("SAVE THE GIRL!",150,24)
+   fill("blue")
+  text(" LIVES "+lives,170,60) 
+
+
+  if(keyDown("right")){
+ 
+  girl.x=girl.x+2
+  
+}
+if(keyDown("left")){
+girl.x=girl.x-2
+}  
+  if(keyDown(UP_ARROW)){
+     girl.y=girl.y-2
+    }
+     if(keyDown(DOWN_ARROW)){
+     girl.y=girl.y+2
+    }
+ if(keyDown(ENTER)){
+  knife1.velocityX=-6;
+  knife1.velocityY=0;
+  knife2.velocityX=6;
+  knife2.velocityY=0;
+  knife3.velocityX=6;
+  knife3.velocityY=4
+ }
+ if(lives==0){
+  textSize(20);
+  fill("black")
+  text("YOU LOST",178,178)
+ knife1.velocityY=0;
+  knife2.velocityY=0;
+ knife3 .velocityY=0;
+
+ girl.velocityY=0;
+}
+  createEdgeSprites()
+  girl.bounceOff(edges)
+ knife1.bounceOff(edges)
+knife2.bounceOff(edges)
+knife3.bounceOff(edges)
+if ((girl.isTouching(knife1))||(girl.isTouching(knife2))|| (girl.isTouching(knife3)))
+{
+  girl.x=145
+  girl.y=352
+  lives=lives-1
+}
+
+
+drawSprites()
+}
